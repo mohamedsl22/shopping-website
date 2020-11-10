@@ -1,0 +1,79 @@
+<div style="overflow-y: scroll; height:400px;">
+    <div *ngIf="progress"  class="d-flex justify-content-center">
+        <div class="spinner-grow text-danger" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-warning" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-info" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    <div *ngIf="admin">
+        <label (click)="addNewProduct= !addNewProduct" style="text-align:right;width: 100%; font-size:24px;">+</label>
+        <form (ngSubmit)="addProduct($event)" *ngIf="addNewProduct">
+            <input type="text" name="pName" class="form-control input_user" value="" placeholder="Product Name">
+            <input type="text" name="pID" class="form-control input_user" value="" placeholder="Product ID">
+            <input type="number" name="pPrice" class="form-control input_user" value=""  placeholder="Product Price">
+            <input type="file" name="pImg" class="form-control input_user" (change)="onSelectImage($event,false)">
+            <select name="pCategory" class="form-control">
+                <option>milk & eggs</option>
+                <option>Vegetables & Fruites</option>
+                <option>Meat & Fish</option>
+                <option>Drinks</option>
+              </select>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+
+    <div *ngIf="productToEdit > -1">
+        <form (ngSubmit)="editProduct($event)">
+            <input type="text" name="pName" class="form-control input_user" [value]="_product.allProducts[productToEdit].name" placeholder="Product Name">
+            <input type="number" name="pPrice" class="form-control input_user" [value]="_product.allProducts[productToEdit].price" placeholder="Product Price">
+            <input type="file" name="pImg" class="form-control input_user"  (change)="onSelectImage($event,true)" >
+            <select name="pCategory" [value]="_product.allProducts[productToEdit].category" class="form-control">
+                <option>milk & eggs</option>
+                <option>Vegetables & Fruites</option>
+                <option>Meat & Fish</option>
+                <option>Drinks</option>
+            </select>
+            <button type="submit">Update</button>
+        </form>
+    </div>
+
+
+    <div *ngFor="let o of _product.orders" >
+        <div class="p-2 bd-highlight">
+        
+            <div class="card" >
+                <div class="card-body" >
+                    <div class="d-flex justify-content-end">
+                        <button *ngIf="isOrder==false" (click)="onDecreaseAmount(o)" style="border-radius: 10px" class="btn btn-secondary d-flex justify-content-end">X</button>
+                    </div>
+                    
+                    <div class="d-flex align-items-center flex-column">
+                        <h5 class="card-title">{{o.pData.name}}</h5>
+                        <img src={{o.pData.image}} class="rounded-circle border border-warning" width="80" height="80"><br>
+                        <label>price: {{o.pData.price}} ₪</label><br>
+                        <label>quantity: {{o.amount}}</label>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div *ngIf="!admin" class="flex-row" >
+        <div class="d-flex justify-content-end " >
+            <a *ngIf="isOrder==true" class="btn btn-secondary" routerLink="/Main">back to Shop</a >
+            <a *ngIf="isOrder==false && _product.orders.length>0" class="btn btn-warning" routerLink="/Order">order</a >
+        </div>
+        <div class="d-flex justify-content-start" style="margin-left: 5px;">
+            <h5>Total: {{onAddOrder()}}</h5>
+        </div>
+        <div class="d-flex justify-content-start " style="margin-left: 5px;">
+            <button (click)="clearAll()" class="btn btn-danger" style="margin-top: 15px;">Clear All</button>
+        </div>
+    </div>
+</div>

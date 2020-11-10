@@ -1,0 +1,14 @@
+
+.cartDiv{
+    height: 100%;
+    background-color: rgb(181, 240, 240);
+}
+
+.doFlex{
+    flex: 0 0 98%;
+    max-width: 98%
+}
+
+.modal.show{
+    display: block;
+}

@@ -1,0 +1,40 @@
+
+
+<div *ngIf="!orderSuccessfuly" class="row " >
+    <div class="col-md-5">
+        <cart [isOrder]="true"></cart>
+    </div>
+    <div class="col-md-5">
+        <h2>Orders</h2><hr>
+        <label>Shipping Details</label><hr>
+        <form (ngSubmit)="onOrder($event)">
+            <div class="col-md-6">
+                <input type="text" (dblclick)="autoFill($event.target)" name="city" class="form-control input_user" placeholder="City"/>
+            </div>
+            <div class="col-md-6">
+                <input (dblclick)="autoFill($event.target)" type="text" name="street" class="form-control input_user" placeholder="Street"/>
+            </div>
+            <div class="col-md-6">
+                <input type="date" name="sDate" class="form-control input_user" placeholder="Shipping Date"/>
+            </div>
+            <label>Payments:</label><hr>
+
+            <div class="d-flex justify-content-center col-md-6">
+                <input type="text" (dblclick)="autoFill($event.target)" name="cc" class="form-control input_user" placeholder="Credit Card"/>
+            </div>
+            <div >
+                <button class="btn btn-primary" type="submit">Order</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div *ngIf="orderSuccessfuly" class="shadow p-3 mb-5 bg-white rounded d-flex justify-content-center">
+    <div>
+        purchase is done successfully!<br>
+        download the bill <button class="btn-link" (click)="downloadPDF()">click here</button><br><br>
+        <button class="btn btn-primary" (click)="afterOrder()"> Ok!</button>
+
+    </div>
+</div>

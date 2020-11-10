@@ -1,0 +1,98 @@
+<div *ngIf="!continue" class="col-md-8 order-md-1 container ">
+    <h4 class="mb-3">Sing up - user</h4>
+    <form (ngSubmit)="submitFirstForm($event)" class="needs-validation" novalidate="">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="userID">ID</label>
+          <input type="number" class="form-control" name="userID" placeholder="Enter your ID number" value="" required="">
+          <div class="invalid-feedback">
+            Valid ID is required.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="you@example.com">
+            <div class="invalid-feedback">
+              Please enter a valid email address for shipping updates.
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="Password">Password</label>
+          <input type="password" class="form-control" name="password" placeholder="choose a password" value="" required="">
+          <div style="color: red;" *ngIf="wrongPassword">
+            Not the same password
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confirmPassword" placeholder="confirm your password">
+            <div style="color: red;" *ngIf="wrongPassword">
+              Not the same password you've entered.
+            </div>
+        </div>
+      </div>
+
+
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Continue</button>
+    </form>
+  </div>
+
+
+
+  <div *ngIf="continue" class="col-md-8 order-md-1 container " >
+    <h4 class="mb-3">Sing up - user</h4>
+    <form (ngSubmit)="OnSubmit($event)" class="needs-validation" novalidate="">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="City">City</label>
+          <input type="text" class="form-control" name="city" placeholder="City name" value="" required="">
+          <div class="invalid-feedback">
+            Valid city name is required.
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="email">Street</label>
+            <input type="text" class="form-control" name="street" placeholder="Street name">
+            <div class="invalid-feedback">
+                Valid street name is required.
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="Password">Name</label>
+          <input type="text" class="form-control" name="firstname" placeholder="Enter your name" value="" required="">
+          <div class="invalid-feedback">
+           valid name is required
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="confirmPassword">Last Name</label>
+            <input type="text" class="form-control" name="lastname" placeholder="Enter your last name">
+            <div class="invalid-feedback">
+              valid last name is required
+            </div>
+        </div>
+      </div>
+
+
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Submit</button>
+    </form>
+
+    <div *ngIf="isDone"  class="d-flex justify-content-center">
+      <div class="spinner-grow text-danger" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-warning" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-info" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
+
+  </div>
